@@ -1,0 +1,34 @@
+Scripts Creados:
+1. PlayerMovement.cs
+
+Movimiento con WASD
+Correr con Shift
+Salto con Spacebar
+Detección de suelo
+Control de gravedad
+
+2. PlayerAnimations.cs
+
+Sistema de animaciones completo
+Parámetros: Speed, IsGrounded, Jump, IsRunning
+Compatible con Animator Controller
+
+3. ItemCollector.cs
+
+Recolección de objetos con tecla E
+Detección por radio
+Contador de items
+Incluye script Collectible.cs para los objetos
+
+4. CheckpointTimer.cs
+
+Cronómetro desde punto A hasta punto B
+Detección automática de checkpoints
+Formato de tiempo: MM:SS:MS
+Eventos para cuando se alcanza el objetivo
+
+5. TimerUIDisplay.cs
+
+Interfaz visual para el cronómetro
+Muestra contador de items
+Panel de tiempo final
