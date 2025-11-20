@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3396308}
   - component: {fileID: 2320308}
   - component: {fileID: 13585600}
-  m_Layer: 0
+  - component: {fileID: -7481020630835633986}
+  - component: {fileID: -5844744262206466910}
+  m_Layer: 6
   m_Name: Pumpkin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,12 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179364}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3396308
 MeshFilter:
@@ -52,9 +55,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +85,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &13585600
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -87,8 +94,60 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179364}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.41164672
   m_Center: {x: -0.00001129508, y: 0.013525206, z: 0.26327887}
+--- !u!114 &-7481020630835633986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad05d64fe9c15b49a1199cbd9fea267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: Coin
+  coinValue: 1
+  points: 10
+  rotateItem: 0
+  rotationSpeed: 50
+  bobUpDown: 1
+  bobHeight: 0.3
+  bobSpeed: 2
+  collectSound: {fileID: 8300000, guid: 1204fb42360ab1c40969dc0991120fbf, type: 3}
+--- !u!114 &-5844744262206466910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887082e992617e84bbc2bc16d9712e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectParticles: {fileID: 0}
+  createParticlesIfNull: 1
+  useScaleEffect: 1
+  scaleSpeed: 5
+  maxScale: 1.5
+  useFadeOut: 0
+  fadeSpeed: 2
+  floatUp: 0
+  floatSpeed: 2
+  floatDistance: 1
