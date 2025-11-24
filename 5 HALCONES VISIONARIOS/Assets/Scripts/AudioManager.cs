@@ -6,35 +6,35 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfxSource;
     public AudioSource musicSource;
     public AudioSource footstepSource;
-    
+
     [Header("Player Sounds")]
     public AudioClip walkSound;
     public AudioClip runSound;
     public AudioClip jumpSound;
     public AudioClip landSound;
-    
+
     [Header("Game Sounds")]
     public AudioClip collectSound;
     public AudioClip timerStartSound;
     public AudioClip timerEndSound;
-    
+
     [Header("Background Music")]
     public AudioClip backgroundMusic;
-    
+
     [Header("Volume Settings")]
     [Range(0f, 1f)] public float sfxVolume = 1f;
     [Range(0f, 1f)] public float musicVolume = 0.5f;
     [Range(0f, 1f)] public float footstepVolume = 0.7f;
-    
+
     [Header("Footstep Settings")]
     public float walkFootstepInterval = 0.5f;
     public float runFootstepInterval = 0.3f;
-    
+
     private float footstepTimer = 0f;
     private bool isPlayingFootsteps = false;
-    
+
     public static AudioManager Instance { get; private set; }
-    
+
     void Awake()
     {
         // Singleton pattern
@@ -48,15 +48,15 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         SetupAudioSources();
     }
-    
+
     void Start()
     {
         PlayBackgroundMusic();
     }
-    
+
     void SetupAudioSources()
     {
         // Create audio sources if they don't exist
@@ -65,35 +65,35 @@ public class AudioManager : MonoBehaviour
             sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
         }
-        
+
         if (musicSource == null)
         {
             musicSource = gameObject.AddComponent<AudioSource>();
             musicSource.loop = true;
             musicSource.playOnAwake = false;
         }
-        
+
         if (footstepSource == null)
         {
             footstepSource = gameObject.AddComponent<AudioSource>();
             footstepSource.playOnAwake = false;
         }
-        
+
         UpdateVolumes();
     }
-    
+
     void Update()
     {
         UpdateVolumes();
     }
-    
+
     void UpdateVolumes()
     {
         if (sfxSource != null) sfxSource.volume = sfxVolume;
         if (musicSource != null) musicSource.volume = musicVolume;
         if (footstepSource != null) footstepSource.volume = footstepVolume;
     }
-    
+
     // Background Music
     public void PlayBackgroundMusic()
     {
@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
             musicSource.Play();
         }
     }
-    
+
     public void StopBackgroundMusic()
     {
         if (musicSource != null)
@@ -111,7 +111,7 @@ public class AudioManager : MonoBehaviour
             musicSource.Stop();
         }
     }
-    
+
     // Footstep Sounds
     public void PlayFootsteps(bool isRunning, bool isGrounded)
     {
@@ -120,14 +120,14 @@ public class AudioManager : MonoBehaviour
             StopFootsteps();
             return;
         }
-        
+
         AudioClip footstepClip = isRunning ? runSound : walkSound;
         float interval = isRunning ? runFootstepInterval : walkFootstepInterval;
-        
+
         if (footstepClip == null || footstepSource == null) return;
-        
+
         footstepTimer += Time.deltaTime;
-        
+
         if (footstepTimer >= interval)
         {
             footstepSource.PlayOneShot(footstepClip);
@@ -135,42 +135,58 @@ public class AudioManager : MonoBehaviour
             isPlayingFootsteps = true;
         }
     }
-    
+
     public void StopFootsteps()
     {
         footstepTimer = 0f;
         isPlayingFootsteps = false;
     }
-    
+
     // Jump Sound
     public void PlayJumpSound()
     {
         PlaySound(jumpSound);
     }
-    
+
     // Land Sound
     public void PlayLandSound()
     {
         PlaySound(landSound);
     }
-    
+
     // Collect Sound
     public void PlayCollectSound()
     {
         PlaySound(collectSound);
     }
-    
+
     // Timer Sounds
     public void PlayTimerStartSound()
     {
-        PlaySound(timerStartSound);
+        if (timerStartSound != null)
+        {
+            PlaySound(timerStartSound);
+            Debug.Log("Playing timer start sound");
+        }
+        else
+        {
+            Debug.LogWarning("Timer start sound is not assigned!");
+        }
     }
-    
+
     public void PlayTimerEndSound()
     {
-        PlaySound(timerEndSound);
+        if (timerEndSound != null)
+        {
+            PlaySound(timerEndSound);
+            Debug.Log("Playing timer end sound");
+        }
+        else
+        {
+            Debug.LogWarning("Timer end sound is not assigned!");
+        }
     }
-    
+
     // Generic sound player
     public void PlaySound(AudioClip clip)
     {
@@ -179,7 +195,7 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(clip);
         }
     }
-    
+
     // Play sound at specific position
     public void PlaySoundAtPosition(AudioClip clip, Vector3 position)
     {
@@ -188,18 +204,18 @@ public class AudioManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(clip, position, sfxVolume);
         }
     }
-    
+
     // Volume controls
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
     }
-    
+
     public void SetMusicVolume(float volume)
     {
         musicVolume = Mathf.Clamp01(volume);
     }
-    
+
     public void SetFootstepVolume(float volume)
     {
         footstepVolume = Mathf.Clamp01(volume);

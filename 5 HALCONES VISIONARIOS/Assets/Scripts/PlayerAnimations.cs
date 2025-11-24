@@ -4,43 +4,53 @@ public class PlayerAnimations : MonoBehaviour
 {
     private Animator animator;
     private PlayerMovement playerMovement;
-    
+    private PlayerHealthSystem healthSystem;
+
     // Animator parameter names
     private readonly string PARAM_SPEED = "Speed";
     private readonly string PARAM_GROUNDED = "IsGrounded";
     private readonly string PARAM_JUMP = "Jump";
     private readonly string PARAM_RUNNING = "IsRunning";
-    
+    private readonly string PARAM_DAMAGE = "TakeDamage";
+    private readonly string PARAM_DEATH = "Death";
+
     void Start()
     {
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
-        
+        healthSystem = GetComponent<PlayerHealthSystem>();
+
         if (animator == null)
         {
             Debug.LogError("Animator component not found on " + gameObject.name);
         }
-        
+
         if (playerMovement == null)
         {
             Debug.LogError("PlayerMovement component not found on " + gameObject.name);
         }
     }
-    
+
     void Update()
     {
         if (animator == null || playerMovement == null) return;
-        
+
+        // Don't animate if dead
+        if (healthSystem != null && healthSystem.IsDead)
+        {
+            return;
+        }
+
         // Calculate speed magnitude for blend between idle and walk
         float speedMagnitude = playerMovement.Velocity.magnitude;
         animator.SetFloat(PARAM_SPEED, speedMagnitude);
-        
+
         // Set grounded state
         animator.SetBool(PARAM_GROUNDED, playerMovement.IsGrounded);
-        
+
         // Set running state
         animator.SetBool(PARAM_RUNNING, playerMovement.IsRunning);
-        
+
         // Trigger jump animation
         if (playerMovement.IsJumping)
         {
