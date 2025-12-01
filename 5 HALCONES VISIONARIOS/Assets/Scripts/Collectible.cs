@@ -73,7 +73,7 @@ public class Collectible : MonoBehaviour
 /*
 SETUP INSTRUCTIONS FOR COINS:
 
-1. Create a coin prefab (3D object like Cylinder or Sphere)
+1. Create a coin prefab (3D object)
 2. Add a Collider component and check "Is Trigger"
 3. Add the Collectible script to the coin
 4. Set ItemType to "Coin"
