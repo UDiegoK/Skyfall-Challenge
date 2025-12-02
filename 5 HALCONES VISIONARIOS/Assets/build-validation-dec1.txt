@@ -1,0 +1,4 @@
+General build validation – December 1:
+- All main mechanics were reviewed.  
+- Everything works correctly.  
+- No errors were found.
